@@ -16,4 +16,4 @@ These are ARM docker builds for dive as the official image doesn't provide them.
 ## Versions
 
 * **06.12.21:** - Rebase to Alpine 3.15
-* **17.08.21:** - Initial Release
+* **17.08.21:** - Initial Release.
