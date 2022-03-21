@@ -26,6 +26,7 @@ RUN \
     /tmp/docker.tar.gz -C \
     /tmp/docker/ --strip-components=1 && \
   mv /tmp/docker/docker /usr/local/bin && \
+  echo "**** installed docker cli version ${DOCKER_RELEASE} ****" && \
   echo "**** install dive ****" && \
   mkdir -p /tmp/dive && \
   if [ -z ${DIVE_RELEASE+x} ]; then \
@@ -40,6 +41,8 @@ RUN \
     /tmp/dive/ --strip-components=1 && \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
+  echo "**** installed dive version ${DIVE_RELEASE} ****" && \
+  echo "**** clean up ****" && \  
   apk del --purge \
     build-dependencies && \
   rm -rf \
