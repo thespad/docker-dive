@@ -11,6 +11,7 @@ RUN \
   apk add -U --upgrade --no-cache  \
     bash \
     curl \
+    grep \
     jq && \
   echo "**** install docker cli ****" && \
   mkdir -p /tmp/docker && \
