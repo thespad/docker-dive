@@ -11,12 +11,13 @@ RUN \
   apk add -U --upgrade --no-cache  \
     bash \
     curl \
+    grep \
     jq && \
   echo "**** install docker cli ****" && \
   mkdir -p /tmp/docker && \
   if [ -z ${DOCKER_RELEASE+x} ]; then \
     DOCKER_RELEASE=$(curl -sX GET "https://api.github.com/repos/docker/cli/tags" | \
-    jq -r 'limit(1;.[]) .name' | sed 's/^.//'); \
+    jq -r '.[] | .name' | grep -P -v -m 1 '(rc|beta|alpha)' | sed 's/^.//'); \
   fi && \
   ARCH=$(uname -m | sed 's/armv7l/armhf/') && \
   curl -s -o \
