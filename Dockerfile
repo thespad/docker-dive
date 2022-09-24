@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.15
+FROM ghcr.io/linuxserver/baseimage-alpine:3.16
 
 LABEL maintainer="Adam Beardwood"
 LABEL org.opencontainers.image.source=https://github.com/TheSpad/docker-dive
