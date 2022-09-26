@@ -1,7 +1,12 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.15
+FROM ghcr.io/linuxserver/baseimage-alpine:3.16
 
-LABEL maintainer="Adam Beardwood"
-LABEL org.opencontainers.image.source=https://github.com/TheSpad/docker-dive
+ARG BUILD_DATE
+ARG VERSION
+ARG APP_VERSION
+LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thespad"
+LABEL org.opencontainers.image.source="https://github.com/thespad/docker-dive"
+LABEL org.opencontainers.image.url="https://github.com/thespad/docker-dive"
 
 ARG GOCACHE=/tmp
 
