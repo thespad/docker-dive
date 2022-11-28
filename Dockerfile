@@ -12,6 +12,8 @@ ARG GOCACHE=/tmp \
     GOOS=linux \
     CGO_ENABLED=0
 
+COPY go/ /tmp/
+
 RUN \
   apk add --update --no-cache --virtual=build-dependencies \
     go && \
@@ -44,7 +46,10 @@ RUN \
   tar xf \
     /tmp/dive.tar.gz -C \
     /tmp/dive/ --strip-components=1 && \
+  mv /tmp/go.mod /tmp/dive && \
+  mv /tmp/go.sum /tmp/dive && \
   cd /tmp/dive && \
+  go mod download && \
   go build -o /usr/local/bin/dive && \
   echo "**** installed dive version ${DIVE_RELEASE} ****" && \
   echo "**** clean up ****" && \  
