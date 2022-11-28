@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.16
+FROM ghcr.io/linuxserver/baseimage-alpine:3.16 AS build-stage
 
 ARG BUILD_DATE
 ARG VERSION
@@ -8,16 +8,15 @@ LABEL maintainer="thespad"
 LABEL org.opencontainers.image.source="https://github.com/thespad/docker-dive"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-dive"
 
-ARG GOCACHE=/tmp
+ARG GOCACHE=/tmp \
+    GOOS=linux \
+    CGO_ENABLED=0
 
 RUN \
   apk add --update --no-cache --virtual=build-dependencies \
     go && \
   apk add -U --upgrade --no-cache  \
-    bash \
-    curl \
-    grep \
-    jq && \
+    grep && \
   echo "**** install docker cli ****" && \
   mkdir -p /tmp/docker && \
   if [ -z ${DOCKER_RELEASE+x} ]; then \
@@ -55,4 +54,8 @@ RUN \
     /tmp/* \
     /root/go
 
-ENTRYPOINT ["/usr/local/bin/dive"]
+FROM scratch
+
+COPY --from=build-stage /usr/local/bin/dive /
+
+ENTRYPOINT ["/dive"]
