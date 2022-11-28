@@ -49,7 +49,6 @@ RUN \
   mv /tmp/go.mod /tmp/dive && \
   mv /tmp/go.sum /tmp/dive && \
   cd /tmp/dive && \
-  go mod download && \
   go build -o /usr/local/bin/dive && \
   echo "**** installed dive version ${DIVE_RELEASE} ****" && \
   echo "**** clean up ****" && \  
