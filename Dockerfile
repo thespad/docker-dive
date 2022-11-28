@@ -62,4 +62,6 @@ FROM scratch
 
 COPY --from=build-stage /usr/local/bin/dive /
 
+COPY --from=build-stage /usr/local/bin/docker /usr/local/bin/docker
+
 ENTRYPOINT ["/dive"]
