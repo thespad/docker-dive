@@ -29,7 +29,7 @@ The architectures supported by this image are:
 
 ## Versions
 
-* **28.11.22:** - Use scratch image for run stage.
+* **28.11.22:** - Use scratch image for run stage, update dive deps to resolve security vulns.
 * **24.09.22:** - Rebase to Alpine 3.16
 * **06.12.21:** - Rebase to Alpine 3.15
 * **17.08.21:** - Initial Release.
