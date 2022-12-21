@@ -1,5 +1,8 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.16 AS build-stage
+# syntax=docker/dockerfile:1
 
+FROM ghcr.io/linuxserver/baseimage-alpine:3.17 AS build-stage
+
+# set version label
 ARG BUILD_DATE
 ARG VERSION
 ARG APP_VERSION
@@ -59,6 +62,15 @@ RUN \
     /root/go
 
 FROM scratch
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG APP_VERSION
+LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thespad"
+LABEL org.opencontainers.image.source="https://github.com/thespad/docker-dive"
+LABEL org.opencontainers.image.url="https://github.com/thespad/docker-dive"
 
 COPY --from=build-stage /usr/local/bin/dive /
 
