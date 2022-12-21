@@ -36,13 +36,13 @@ RUN \
   echo "**** installed docker cli version ${DOCKER_RELEASE} ****" && \
   echo "**** install dive ****" && \
   mkdir -p /tmp/dive && \
-  if [ -z ${DIVE_RELEASE+x} ]; then \
-    DIVE_RELEASE=$(curl -sX GET "https://api.github.com/repos/wagoodman/dive/releases/latest" \
+  if [ -z ${APP_VERSION+x} ]; then \
+    APP_VERSION=$(curl -sX GET "https://api.github.com/repos/wagoodman/dive/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -s -o \
     /tmp/dive.tar.gz -L \
-    "https://github.com/wagoodman/dive/archive/${DIVE_RELEASE}.tar.gz" && \
+    "https://github.com/wagoodman/dive/archive/${APP_VERSION}.tar.gz" && \
   tar xf \
     /tmp/dive.tar.gz -C \
     /tmp/dive/ --strip-components=1 && \
@@ -50,7 +50,7 @@ RUN \
   mv /tmp/go.sum /tmp/dive && \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
-  echo "**** installed dive version ${DIVE_RELEASE} ****" && \
+  echo "**** installed dive version ${APP_VERSION} ****" && \
   echo "**** clean up ****" && \  
   apk del --purge \
     build-dependencies && \
