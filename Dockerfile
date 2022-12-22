@@ -1,5 +1,8 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.16 AS build-stage
+# syntax=docker/dockerfile:1
 
+FROM ghcr.io/linuxserver/baseimage-alpine:3.17 AS build-stage
+
+# set version label
 ARG BUILD_DATE
 ARG VERSION
 ARG APP_VERSION
@@ -36,13 +39,13 @@ RUN \
   echo "**** installed docker cli version ${DOCKER_RELEASE} ****" && \
   echo "**** install dive ****" && \
   mkdir -p /tmp/dive && \
-  if [ -z ${DIVE_RELEASE+x} ]; then \
-    DIVE_RELEASE=$(curl -sX GET "https://api.github.com/repos/wagoodman/dive/releases/latest" \
+  if [ -z ${APP_VERSION+x} ]; then \
+    APP_VERSION=$(curl -sX GET "https://api.github.com/repos/wagoodman/dive/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -s -o \
     /tmp/dive.tar.gz -L \
-    "https://github.com/wagoodman/dive/archive/${DIVE_RELEASE}.tar.gz" && \
+    "https://github.com/wagoodman/dive/archive/${APP_VERSION}.tar.gz" && \
   tar xf \
     /tmp/dive.tar.gz -C \
     /tmp/dive/ --strip-components=1 && \
@@ -50,7 +53,7 @@ RUN \
   mv /tmp/go.sum /tmp/dive && \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
-  echo "**** installed dive version ${DIVE_RELEASE} ****" && \
+  echo "**** installed dive version ${APP_VERSION} ****" && \
   echo "**** clean up ****" && \  
   apk del --purge \
     build-dependencies && \
@@ -59,6 +62,15 @@ RUN \
     /root/go
 
 FROM scratch
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG APP_VERSION
+LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thespad"
+LABEL org.opencontainers.image.source="https://github.com/thespad/docker-dive"
+LABEL org.opencontainers.image.url="https://github.com/thespad/docker-dive"
 
 COPY --from=build-stage /usr/local/bin/dive /
 
