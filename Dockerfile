@@ -71,6 +71,7 @@ LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="thespad"
 LABEL org.opencontainers.image.source="https://github.com/thespad/docker-dive"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-dive"
+LABEL org.opencontainers.image.description="A tool for exploring a docker image, layer contents, and discovering ways to shrink the size of your Docker/OCI image"
 
 COPY --from=build-stage /usr/local/bin/dive /
 
