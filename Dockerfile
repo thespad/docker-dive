@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.18 AS build-stage
+FROM ghcr.io/linuxserver/baseimage-alpine:3.19 AS build-stage
 
 # set version label
 ARG BUILD_DATE
@@ -50,7 +50,7 @@ RUN \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
   echo "**** installed dive version ${APP_VERSION} ****" && \
-  echo "**** clean up ****" && \  
+  echo "**** clean up ****" && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
