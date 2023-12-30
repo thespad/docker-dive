@@ -25,10 +25,10 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | latest |
 | arm64 | ✅ | latest |
-| armhf | ❌ | latest |
 
 ## Versions
 
+* **30.12.23:** - Rebase to Alpine 3.19.
 * **08.07.23:** - Revert to using upstream deps.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop armhf support.
 * **21.12.22:** - Rebase to Alpine 3.17.
