@@ -7,9 +7,9 @@
 [![GitHub Stars](https://img.shields.io/github/stars/thespad/docker-dive.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/thespad/docker-dive)
 [![Docker Stars](https://img.shields.io/docker/stars/thespad/dive.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/thespad/dive)
 
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-check-and-release.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-dive/actions/workflows/call-check-and-release.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-baseimage-update.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-dive/actions/workflows/call-baseimage-update.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-dive/actions/workflows/call-build-image.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-check-and-release.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-dive/actions/workflows/call-check-and-release.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-baseimage-update.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-dive/actions/workflows/call-baseimage-update.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-dive/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-dive/actions/workflows/call-build-image.yml)
 
 [dive](https://github.com/wagoodman/dive) is a tool for exploring a docker image, layer contents, and discovering ways to shrink the size of your Docker/OCI image.
 
@@ -26,6 +26,7 @@ The architectures supported by this image are:
 
 ## Versions
 
+* **26.05.24:** - Rebase to Alpine 3.20.
 * **30.12.23:** - Rebase to Alpine 3.19.
 * **08.07.23:** - Revert to using upstream deps.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop armhf support.
