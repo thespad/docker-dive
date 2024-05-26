@@ -74,6 +74,4 @@ COPY --from=build-stage /usr/local/bin/dive /
 
 COPY --from=build-stage /usr/local/bin/docker /usr/local/bin/docker
 
-RUN printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
-
 ENTRYPOINT ["/dive"]
