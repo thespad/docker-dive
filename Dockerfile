@@ -46,7 +46,11 @@ RUN \
     "https://github.com/wagoodman/dive/archive/${APP_VERSION}.tar.gz" && \
   tar xf \
     /tmp/dive.tar.gz -C \
-    /tmp/dive/ --strip-components=1 && \
+    /tmp/dive/ --strip-components=1
+
+COPY patch/image_archive.go /tmp/dive/dive/image/docker/image_archive.go
+
+RUN \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
   echo "**** installed dive version ${APP_VERSION} ****" && \
