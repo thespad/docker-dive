@@ -24,13 +24,57 @@ The architectures supported by this image are:
 | amd64 | ✅ | latest |
 | arm64 | ✅ | latest |
 
+## Application Setup
+
+The entrypoint for the image is the dive executable, arguments can be passed directly as a command. Pass `--help` for a full list of options.
+
+## Read-Only Operation
+
+This image can be run with a read-only container filesystem.
+
+## Usage
+
+Here are some example snippets to help you get started creating a container.
+
+### docker cli
+
+```shell
+docker run -it \
+  --rm \
+  --name=dive \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  ghcr.io/thespad/dive:latest \
+  imagename:tag
+```
+
+## Parameters
+
+Container images are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+| Parameter | Function |
+| :----: | --- |
+| `-v /var/run/docker.sock:/var/run/docker.sock` | Docker socket mount for access to images |
+
+## Building locally
+
+If you want to make local modifications to these images for development purposes or just to customize the logic:
+
+```shell
+git clone https://github.com/thespad/docker-dive.git
+cd docker-dive
+docker build \
+  --no-cache \
+  --pull \
+  -t ghcr.io/thespad/dive:latest .
+```
+
 ## Versions
 
-* **26.05.24:** - Rebase to Alpine 3.20.
-* **30.12.23:** - Rebase to Alpine 3.19.
+* **02.02.25:** - Rebase build stage to Alpine 3.21.
+* **30.12.23:** - Rebase build stage to Alpine 3.19.
 * **08.07.23:** - Revert to using upstream deps.
-* **14.05.23:** - Rebase to Alpine 3.18. Drop armhf support.
-* **21.12.22:** - Rebase to Alpine 3.17.
+* **14.05.23:** - Rebase build stage to Alpine 3.18. Drop armhf support.
+* **21.12.22:** - Rebase build stage to Alpine 3.17.
 * **28.11.22:** - Use scratch image for run stage, update dive deps to resolve security vulns.
 * **24.09.22:** - Rebase to Alpine 3.16
 * **06.12.21:** - Rebase to Alpine 3.15
