@@ -68,6 +68,12 @@ docker build \
   -t ghcr.io/thespad/dive:latest .
 ```
 
+The arm variants can be built on x86_64 hardware and vice versa using `lscr.io/linuxserver/qemu-static`
+
+```bash
+docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
+```
+
 ## Versions
 
 * **02.02.25:** - Rebase build stage to Alpine 3.21.
