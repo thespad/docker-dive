@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21 AS build-stage
+FROM ghcr.io/linuxserver/baseimage-alpine:edge AS build-stage
 
 # set version label
 ARG BUILD_DATE
@@ -46,11 +46,7 @@ RUN \
     "https://github.com/wagoodman/dive/archive/${APP_VERSION}.tar.gz" && \
   tar xf \
     /tmp/dive.tar.gz -C \
-    /tmp/dive/ --strip-components=1
-
-COPY patch/image_archive.go /tmp/dive/dive/image/docker/image_archive.go
-
-RUN \
+    /tmp/dive/ --strip-components=1 && \
   cd /tmp/dive && \
   go build -o /usr/local/bin/dive && \
   echo "**** installed dive version ${APP_VERSION} ****" && \
