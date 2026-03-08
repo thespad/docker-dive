@@ -38,7 +38,7 @@ RUN \
     /tmp/docker/ --strip-components=1 && \
   mv /tmp/docker/docker /usr/local/bin; \
   else \
-    BINARCH=${ARCH}
+    BINARCH=${ARCH} && \
     curl -sLo /tmp/docker/cli-${DOCKER_RELEASE}.tar.gz https://github.com/docker/cli/archive/refs/tags/v${DOCKER_RELEASE}.tar.gz && \
     cd /tmp/docker && \
     tar -zxf cli-${DOCKER_RELEASE}.tar.gz && \
