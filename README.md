@@ -77,6 +77,7 @@ docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
 
 ## Versions
 
+* **08.03.26:** - Add RISCV build.
 * **21.03.25:** - Rebase build stage to Alpine Edge, remove patches.
 * **02.02.25:** - Rebase build stage to Alpine 3.21.
 * **30.12.23:** - Rebase build stage to Alpine 3.19.
