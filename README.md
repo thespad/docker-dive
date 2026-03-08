@@ -23,6 +23,7 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | amd64 | ✅ | latest |
 | arm64 | ✅ | latest |
+| riscv64 | ✅ | latest |
 
 ## Application Setup
 
