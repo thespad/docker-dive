@@ -16,7 +16,10 @@ ARG GOCACHE=/tmp \
     CGO_ENABLED=0
 
 RUN \
+  ARCH=$(uname -m) && \
   apk add --update --no-cache --virtual=build-dependencies \
+    build-base \
+    git \
     go && \
   apk add -U --upgrade --no-cache  \
     grep && \
@@ -26,14 +29,26 @@ RUN \
     DOCKER_RELEASE=$(curl -sX GET "https://api.github.com/repos/docker/cli/tags" | \
     jq -r '.[] | .name' | grep -P -v -m 1 '(rc|beta|alpha)' | sed 's/^.//'); \
   fi && \
-  ARCH=$(uname -m | sed 's/armv7l/armhf/') && \
+  if [ $ARCH != "riscv64" ]; then \
   curl -s -o \
     /tmp/docker.tar.gz -L \
     "https://download.docker.com/linux/static/stable/${ARCH}/docker-${DOCKER_RELEASE}.tgz" && \
   tar xf \
     /tmp/docker.tar.gz -C \
     /tmp/docker/ --strip-components=1 && \
-  mv /tmp/docker/docker /usr/local/bin && \
+  mv /tmp/docker/docker /usr/local/bin; \
+  else \
+    echo "**** Fetching cli source from https://github.com/docker/cli/archive/refs/tags/v${DOCKER_RELEASE}.tar.gz ****" && \
+    curl -sLo /tmp/docker/cli-${DOCKER_RELEASE}.tar.gz "https://github.com/docker/cli/archive/refs/tags/v${DOCKER_RELEASE}.tar.gz" && \
+    cd /tmp/docker && \
+    tar -zxf cli-${DOCKER_RELEASE}.tar.gz && \
+    cd cli-${DOCKER_RELEASE} && \
+    mkdir -p .gopath/src/github.com/docker && \
+    export GOPATH=/tmp/docker/cli-${DOCKER_RELEASE}/.gopath && \
+    ln -s `pwd` .gopath/src/github.com/docker/cli && \
+    DISABLE_WARN_OUTSIDE_CONTAINER=1 make binary && \
+    mv build/docker-linux-${ARCH} /usr/local/bin/docker; \
+  fi && \
   echo "**** installed docker cli version ${DOCKER_RELEASE} ****" && \
   echo "**** install dive ****" && \
   mkdir -p /tmp/dive && \

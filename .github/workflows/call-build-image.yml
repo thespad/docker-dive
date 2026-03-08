@@ -8,14 +8,14 @@ on:
 
 jobs:
   call-workflow:
-    uses: thespad/actions/.github/workflows/build-image.yml@v9.0.10
+    uses: thespad/actions/.github/workflows/build-image.yml@v9.1.0
     with:
       repo_owner: "thespad"
       app_name: "dive"
       release_type: "github"
       release_url: "https://api.github.com/repos/wagoodman/dive"
       dockerhub_user: "thespad"
-      target-arch: "64"
+      target-arch: "all"
       sign_image: false
       branch_name: "main"
     secrets:
