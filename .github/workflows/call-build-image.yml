@@ -15,7 +15,7 @@ jobs:
       release_type: "github"
       release_url: "https://api.github.com/repos/wagoodman/dive"
       dockerhub_user: "thespad"
-      target-arch: "all"
+      target-arch: "64"
       sign_image: false
       branch_name: "main"
     secrets:
